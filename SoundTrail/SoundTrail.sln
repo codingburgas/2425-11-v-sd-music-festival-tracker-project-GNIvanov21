@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrail.PL", "SoundTrail.PL\SoundTrail.PL.csproj", "{27DD137B-EE53-43DF-8E4B-37EADE0F91A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrail.BLL", "SoundTrail.BLL\SoundTrail.BLL.csproj", "{9255623C-940A-4401-962A-E49E77B0BE2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundTrail.DAL", "SoundTrail.DAL\SoundTrail.DAL.csproj", "{81C0856A-72A8-488E-91C9-685068011A84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27DD137B-EE53-43DF-8E4B-37EADE0F91A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DD137B-EE53-43DF-8E4B-37EADE0F91A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DD137B-EE53-43DF-8E4B-37EADE0F91A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DD137B-EE53-43DF-8E4B-37EADE0F91A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9255623C-940A-4401-962A-E49E77B0BE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9255623C-940A-4401-962A-E49E77B0BE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9255623C-940A-4401-962A-E49E77B0BE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9255623C-940A-4401-962A-E49E77B0BE2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81C0856A-72A8-488E-91C9-685068011A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81C0856A-72A8-488E-91C9-685068011A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81C0856A-72A8-488E-91C9-685068011A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81C0856A-72A8-488E-91C9-685068011A84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
