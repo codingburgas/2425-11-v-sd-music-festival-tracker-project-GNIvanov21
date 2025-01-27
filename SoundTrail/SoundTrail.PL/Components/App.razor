@@ -1,20 +1,143 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <base href="/"/>
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" href="app.css"/>
-    <link rel="stylesheet" href="SoundTrail.PL.styles.css"/>
-    <link rel="icon" type="image/png" href="favicon.png"/>
-    <HeadOutlet/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
-
 <body>
-<Routes/>
-<script src="_framework/blazor.web.js"></script>
-</body>
+<header>
+    <h1>Event Management System</h1>
+</header>
 
+<div class="container">
+    <h2>Upcoming Events</h2>
+    <table id="events-table">
+        <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Events will be dynamically populated here -->
+        </tbody>
+    </table>
+
+    <h2>Register for an Event</h2>
+    <form id="registration-form">
+        <div class="form-group">
+            <label for="event-name">Event Name</label>
+            <input type="text" id="event-name" name="event-name" required>
+        </div>
+        <div class="form-group">
+            <label for="user-name">Your Name</label>
+            <input type="text" id="user-name" name="user-name" required>
+        </div>
+        <div class="form-group">
+            <label for="user-email">Your Email</label>
+            <input type="email" id="user-email" name="user-email" required>
+        </div>
+        <button type="submit" class="btn">Register</button>
+    </form>
+</div>
+
+<script>
+    // Sample data for events (replace with data from your backend)
+    const events = [
+        { name: "Concert in the Park", date: "2023-12-15", location: "Central Park" },
+        { name: "Tech Conference", date: "2024-01-20", location: "Convention Center" },
+        { name: "Art Exhibition", date: "2024-02-10", location: "City Gallery" }
+    ];
+
+    // Populate the events table
+    const eventsTable = document.getElementById("events-table").getElementsByTagName("tbody")[0];
+    events.forEach(event => {
+        const row = eventsTable.insertRow();
+        row.insertCell().textContent = event.name;
+        row.insertCell().textContent = event.date;
+        row.insertCell().textContent = event.location;
+        row.insertCell().innerHTML = `<button class="btn" onclick="registerForEvent('${event.name}')">Register</button>`;
+    });
+
+    // Handle form submission
+    document.getElementById("registration-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const eventName = document.getElementById("event-name").value;
+        const userName = document.getElementById("user-name").value;
+        const userEmail = document.getElementById("user-email").value;
+
+        alert(`Thank you, ${userName}! You have successfully registered for ${eventName}. A confirmation email will be sent to ${userEmail}.`);
+
+        // Clear the form
+        document.getElementById("registration-form").reset();
+    });
+
+    // Register for an event (button click handler)
+    function registerForEvent(eventName) {
+        document.getElementById("event-name").value = eventName;
+        document.getElementById("user-name").focus();
+    }
+</script>
+</body>
 </html>
