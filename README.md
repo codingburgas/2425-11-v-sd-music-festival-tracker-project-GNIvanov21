@@ -1,37 +1,41 @@
-# Example Code for Database Connectivity and Three-Layer Model Structure
+<h1 align="center">SoundTrail</h1>
 
-Welcome! This repository contains **example code** to help you understand **database connectivity** and the **three-layer model structure** in software development.
+📋 Description
+Thre project idea is to create an internet environment, where people have easy access to different concerts and events.
 
-### What is this repository for?
-This code is designed to **demonstrate** key concepts related to:
-- **Database Connectivity**: How to connect your application to a database (Microsoft SQL Server).
-- **Three-Layer Architecture**: The separation of your application into three layers:
-  1. **Data Access Layer (DAL)**: Handles interactions with the database.
-  2. **Business Logic Layer (BLL)**: Contains the core logic of the application.
-  3. **Presentation Layer (PL)**: Manages user interfaces and interaction.
+## 🚀 Languages and Libraries
+<p align="left">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Logo_C_sharp.svg/256px-Logo_C_sharp.svg.png?20221121173824" alt="C#" height=48px width=48px/>
+   <img src="https://www.techmonitor.ai/wp-content/uploads/sites/29/2016/06/SQL.png" alt="SQL" height=48px width=90px/>
+   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png" alt="" height=48px width=48px/>
 
-### Important Notes:
-- The code in this repository is **for learning purposes only** and is not intended for real-world use.
-- It may be **deleted or changed at any time** without prior notice, so be sure to use it while it's here!
-- This is just a simple example to help you understand how these concepts fit together in an application structure.
+</p>
 
-### Why should I use this?
-- If you're learning about software architecture, this repository can give you a **practical example** of how to structure an application.
-- It also provides a basic understanding of how different layers in an application work together, especially when connecting to a database.
+## 🗂 Used technologies
+<p align="left">
+  <img src="https://www.jetbrains.com/guide/assets/logo-135a4cec.png" alt="Rider" height=48px width=48px/>
+  <a href="https://www.microsoft.com/en-us/microsoft-365/powerpoint"><img src="https://img.icons8.com/fluency/48/000000/microsoft-powerpoint-2019.png" alt="MS PowerPoint logo" width=48px /></a>
+  <a href="https://www.adobe.com/"><img src="https://img.icons8.com/color/48/null/adobe-illustrator--v1.png" alt="Adobe"/></a>
+  <a href="https://git-scm.com/"><img src="https://img.icons8.com/color/48/000000/git.png" alt="Git"/></a>
+</p> 
 
-### How to Use This Code:
-1. **Clone or Download**: You can clone or download the repository to explore the code.
-2. (Optional) Install Microsoft.SqlClient package from Nuget Package manager
-2. **Study the Code**: Look at how the database is connected and how the three-layer model is set up.
-3. **Modify and Experiment**: Feel free to modify the code for practice, but remember that this code is not for production use.
+## 📝 Documents
+ 
+<h4>Documents</h4>
+<h4>Presenting</h4>
+  <ul>    
+    <li><a href="">Presentation</a></li>
+  </ul> 
+   
 
-### How to Use TODO-To-Issue tracker:
-1. In the repo where you want the action to run, go to Settings -> Actions (General) -> Workflow permissions and enable "Read and write permissions".
-2. Simply add a line or block comment starting with TODO (or any other comment identifiers configured), followed by a colon and/or space.
-3. For more info follow https://github.com/marketplace/actions/todo-to-issue
 
-### After Reading This:
-- **Please edit this README** to add your own notes, thoughts, or questions as you go through the code.
+## 📥 Installation
+```
+You can download our project by using the green "Code" button.
 
-### Contact:
-If you have any questions or need clarification, feel free to reach out to @dyanakiev.
+Or by pasting the following code in your CMD: https://github.com/codingburgas/2425-11-v-sd-music-festival-tracker-project-GNIvanov21.git
+
+```
+
+## 👨🏻‍💻 Team Members
+| Georgi Ivanov | *Back-end developer*  | 🟩 11V |
