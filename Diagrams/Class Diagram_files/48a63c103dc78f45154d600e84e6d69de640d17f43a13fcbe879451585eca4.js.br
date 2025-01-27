@@ -1,0 +1,2 @@
+var UcGOk,UcHOk=UcGOk=class{constructor(a){this.name="submittedEducationAssignment";this.pDa=a.pDa;this.documentId=a.documentId;this.userId=a.userId}toJSON(){return UcGOk.nb(this)}};UcHOk=UcGOk=__decorate([UcEi({pDa:["connectedApp",Ucqii],documentId:["documentId",Ucj],userId:["userId",Uczi],name:["name",Ucwi("submittedEducationAssignment")]}),__metadata("design:paramtypes",[Object])],UcHOk);
+//# sourceURL=/js/application/universalcanvas_app/chunk/gen_2000000000080018000000000000000000000000000000000000000000.js?compiled=1

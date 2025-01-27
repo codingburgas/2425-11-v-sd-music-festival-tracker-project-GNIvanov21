@@ -1,0 +1,3 @@
+var UcIOk={zOm:"create draft",JIa:"publish"};({}).MRr;var UcJOk=UcBi(UcIOk);var UcKOk,UcLOk=UcKOk=class{constructor(a){this.name="createdEducationAssignment";this.pDa=a.pDa;this.documentId=a.documentId;this.instructions=a.instructions;this.userId=a.userId;this.Sdh=a.Sdh;this.T_a=a.T_a}toJSON(){return UcKOk.nb(this)}};
+UcLOk=UcKOk=__decorate([UcEi({pDa:["connectedApp",Ucqii],T_a:["dueDate",Uci(Ucui)],documentId:["documentId",Ucj],Sdh:["assignmentType",Uci(UcJOk)],userId:["userId",Uczi],instructions:["instructions",Ucbh],name:["name",Ucwi("createdEducationAssignment")]}),__metadata("design:paramtypes",[Object])],UcLOk);
+//# sourceURL=/js/application/universalcanvas_app/chunk/gen_1000000000080018000000000000000000000000000000000000000000.js?compiled=1

@@ -1,0 +1,2 @@
+UcSK.set("action",class extends UcRK{constructor(){const a=Ucu(UczRg);var b=Ucu(Uc0Bf);super("action.js");this.Fm="^ActionBlock$";Uc0K.register(this.id,this.deps.na,a,b);b=UcTc(UcWb).map(c=>{if(a.fca[c].kN)return{className:Uc0K.className,variant:c}}).filter(Uce);this.hf.Pq(this.id,{ActionBlocks:{displayName:i18n.get("action-shape-library-name"),items:b}});UcPoh(this.hf,this.id,"actionShape",b)}});
+//# sourceURL=/js/application/universalcanvas_app/chunk/action.js?compiled=1

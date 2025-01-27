@@ -1,0 +1,6 @@
+i18n.setData(
+    JSON.parse(
+        "{\"ai-idea-generator-generating-label-v2\":\"Generating ideas...\",\"ai-idea-generator-generating-longer-loading-v2\":\"Almost done! Brainstorming ideas... It's taking a bit longer, but will finish up soon.\"}"
+    ),
+    'en'
+);

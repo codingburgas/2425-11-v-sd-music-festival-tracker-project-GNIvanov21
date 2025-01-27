@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\g0sh3to\\RiderProjects\\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\\SoundTrail\\SoundTrail.PL\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SoundTrail.PL.bundle.scp.css",
+      "PackagePath": "staticwebassets\\SoundTrail.PL.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\g0sh3to\\RiderProjects\\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\\SoundTrail\\SoundTrail.PL\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\g0sh3to\\RiderProjects\\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\\SoundTrail\\SoundTrail.PL\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\g0sh3to\\RiderProjects\\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\\SoundTrail\\SoundTrail.PL\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\g0sh3to\\RiderProjects\\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\\SoundTrail\\SoundTrail.PL\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SoundTrail.PL.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SoundTrail.PL.props",
+      "PackagePath": "build\\SoundTrail.PL.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SoundTrail.PL.props",
+      "PackagePath": "buildMultiTargeting\\SoundTrail.PL.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SoundTrail.PL.props",
+      "PackagePath": "buildTransitive\\SoundTrail.PL.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

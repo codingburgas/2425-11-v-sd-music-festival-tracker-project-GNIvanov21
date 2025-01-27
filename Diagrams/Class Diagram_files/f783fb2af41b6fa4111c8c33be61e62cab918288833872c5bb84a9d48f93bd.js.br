@@ -1,0 +1,2 @@
+var Ucxfl=class extends Ucsa{constructor(a){super(a,a,void 0,void 0);this.label=a;this.variant=this.icon=void 0}},Ucyfl=Ucyfl||{id:"cake/app/webroot/ts/angular/controlcenter/teamcontrolcenter/manageteamcategoriesmodal/token/manageteamcategoriesmodal.chunk.closure.js"},Uczfl=new UcJa(Ucyfl.id);var UcAfl=new Uc3a(Uczfl);
+//# sourceURL=/js/application/universalcanvas_app/chunk/gen_4000000000008000000000000000000000000000000000000000000.js?compiled=1

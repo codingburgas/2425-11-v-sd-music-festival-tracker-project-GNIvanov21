@@ -1,0 +1,2 @@
+UcSK.set("people",class extends UcRK{constructor(){const a=Ucu(UcQK),b=Ucu(UcMvd),c=Ucu(UckA);super("people.js");this.Fm="(^PersonShape$)|(^ProfileShapeBankBlock$)";Uchpl.register(this.id,a.na);Ucppl.register(this.id,a.na,b,c);this.hf.Pq(this.id,{PeopleShapes:{displayName:i18n.get("people-shape-library-name"),items:[Uchpl.className]}})}});
+//# sourceURL=/js/application/universalcanvas_app/chunk/people.js?compiled=1

@@ -1,0 +1,840 @@
+/**
+ * Paste common jQuery plugins inside this file.
+ * Only consider placing a plugin in a separate file if it mustn't be loaded everywhere and/or if it's too heavy
+ */
+(function($) {
+
+    /**
+     * Calculates text metrics
+     * @return {{width: number, height: number}}
+     */
+    $.fn.getTextMetrics = (function() {
+        var metricEl;
+
+        return function() {
+            var copyStyles = [
+                'font-size',
+                'font-style',
+                'font-weight',
+                'font-family',
+                'line-height',
+                'text-transform',
+                'letter-spacing'
+            ];
+            var el = $(this);
+
+            if(!metricEl) {
+                metricEl = $('<div class="text-metric-element">').appendTo('body').css({
+                    position: 'absolute',
+                    left: -1000,
+                    top: -1000,
+                    display: 'none'
+                });
+            }
+
+            metricEl.html(el.html());
+
+            $(copyStyles).each(function() {
+                var s = this.toString();
+                metricEl.css(s, el.css(s));
+            });
+
+            return {
+                width: metricEl.outerWidth(),
+                height: metricEl.outerHeight()
+            };
+        }
+    })();
+
+})(jQuery);
+
+/*!
+ * @license: MIT
+ * @copyright: 2012 Evan Plaice <evanplaice@gmail.com>
+ */
+RegExp.escape=function(s){return s.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&');};(function($){'use strict'
+$.csv={defaults:{separator:',',delimiter:'"',headers:true},hooks:{castToScalar:function(value,state){var hasDot=/\./;if(isNaN(value)){return value;}else{if(hasDot.test(value)){return parseFloat(value);}else{var integer=parseInt(value);if(isNaN(integer)){return null;}else{return integer;}}}}},parsers:{parse:function(csv,options){var separator=options.separator;var delimiter=options.delimiter;if(!options.state.rowNum){options.state.rowNum=1;}
+if(!options.state.colNum){options.state.colNum=1;}
+var data=[];var entry=[];var state=0;var value=''
+var exit=false;function endOfEntry(){state=0;value='';if(options.start&&options.state.rowNum<options.start){entry=[];options.state.rowNum++;options.state.colNum=1;return;}
+if(options.onParseEntry===undefined){data.push(entry);}else{var hookVal=options.onParseEntry(entry,options.state);if(hookVal!==false){data.push(hookVal);}}
+entry=[];if(options.end&&options.state.rowNum>=options.end){exit=true;}
+options.state.rowNum++;options.state.colNum=1;}
+function endOfValue(){if(options.onParseValue===undefined){entry.push(value);}else{var hook=options.onParseValue(value,options.state);if(hook!==false){entry.push(hook);}}
+value='';state=0;options.state.colNum++;}
+var escSeparator=RegExp.escape(separator);var escDelimiter=RegExp.escape(delimiter);var match=/(D|S|\n|\r|[^DS\r\n]+)/;var matchSrc=match.source;matchSrc=matchSrc.replace(/S/g,escSeparator);matchSrc=matchSrc.replace(/D/g,escDelimiter);match=RegExp(matchSrc,'gm');csv.replace(match,function(m0){if(exit){return;}
+switch(state){case 0:if(m0===separator){value+='';endOfValue();break;}
+if(m0===delimiter){state=1;break;}
+if(m0==='\n'){endOfValue();endOfEntry();break;}
+if(/^\r$/.test(m0)){break;}
+value+=m0;state=3;break;case 1:if(m0===delimiter){state=2;break;}
+value+=m0;state=1;break;case 2:if(m0===delimiter){value+=m0;state=1;break;}
+if(m0===separator){endOfValue();break;}
+if(m0==='\n'){endOfValue();endOfEntry();break;}
+if(/^\r$/.test(m0)){break;}
+throw new Error('CSVDataError: Illegal State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');case 3:if(m0===separator){endOfValue();break;}
+if(m0==='\n'){endOfValue();endOfEntry();break;}
+if(/^\r$/.test(m0)){break;}
+if(m0===delimiter){throw new Error('CSVDataError: Illegal Quote [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}
+throw new Error('CSVDataError: Illegal Data [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');default:throw new Error('CSVDataError: Unknown State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}});if(entry.length!==0){endOfValue();endOfEntry();}
+return data;},splitLines:function(csv,options){var separator=options.separator;var delimiter=options.delimiter;if(!options.state.rowNum){options.state.rowNum=1;}
+var entries=[];var state=0;var entry='';var exit=false;function endOfLine(){state=0;if(options.start&&options.state.rowNum<options.start){entry='';options.state.rowNum++;return;}
+if(options.onParseEntry===undefined){entries.push(entry);}else{var hookVal=options.onParseEntry(entry,options.state);if(hookVal!==false){entries.push(hookVal);}}
+entry='';if(options.end&&options.state.rowNum>=options.end){exit=true;}
+options.state.rowNum++;}
+var escSeparator=RegExp.escape(separator);var escDelimiter=RegExp.escape(delimiter);var match=/(D|S|\n|\r|[^DS\r\n]+)/;var matchSrc=match.source;matchSrc=matchSrc.replace(/S/g,escSeparator);matchSrc=matchSrc.replace(/D/g,escDelimiter);match=RegExp(matchSrc,'gm');csv.replace(match,function(m0){if(exit){return;}
+switch(state){case 0:if(m0===separator){entry+=m0;state=0;break;}
+if(m0===delimiter){entry+=m0;state=1;break;}
+if(m0==='\n'){endOfLine();break;}
+if(/^\r$/.test(m0)){break;}
+entry+=m0;state=3;break;case 1:if(m0===delimiter){entry+=m0;state=2;break;}
+entry+=m0;state=1;break;case 2:var prevChar=entry.substr(entry.length-1);if(m0===delimiter&&prevChar===delimiter){entry+=m0;state=1;break;}
+if(m0===separator){entry+=m0;state=0;break;}
+if(m0==='\n'){endOfLine();break;}
+if(m0==='\r'){break;}
+throw new Error('CSVDataError: Illegal state [Row:'+options.state.rowNum+']');case 3:if(m0===separator){entry+=m0;state=0;break;}
+if(m0==='\n'){endOfLine();break;}
+if(m0==='\r'){break;}
+if(m0===delimiter){throw new Error('CSVDataError: Illegal quote [Row:'+options.state.rowNum+']');}
+throw new Error('CSVDataError: Illegal state [Row:'+options.state.rowNum+']');default:throw new Error('CSVDataError: Unknown state [Row:'+options.state.rowNum+']');}});if(entry!==''){endOfLine();}
+return entries;},parseEntry:function(csv,options){var separator=options.separator;var delimiter=options.delimiter;if(!options.state.rowNum){options.state.rowNum=1;}
+if(!options.state.colNum){options.state.colNum=1;}
+var entry=[];var state=0;var value='';function endOfValue(){if(options.onParseValue===undefined){entry.push(value);}else{var hook=options.onParseValue(value,options.state);if(hook!==false){entry.push(hook);}}
+value='';state=0;options.state.colNum++;}
+if(!options.match){var escSeparator=RegExp.escape(separator);var escDelimiter=RegExp.escape(delimiter);var match=/(D|S|\n|\r|[^DS\r\n]+)/;var matchSrc=match.source;matchSrc=matchSrc.replace(/S/g,escSeparator);matchSrc=matchSrc.replace(/D/g,escDelimiter);options.match=RegExp(matchSrc,'gm');}
+csv.replace(options.match,function(m0){switch(state){case 0:if(m0===separator){value+='';endOfValue();break;}
+if(m0===delimiter){state=1;break;}
+if(m0==='\n'||m0==='\r'){break;}
+value+=m0;state=3;break;case 1:if(m0===delimiter){state=2;break;}
+value+=m0;state=1;break;case 2:if(m0===delimiter){value+=m0;state=1;break;}
+if(m0===separator){endOfValue();break;}
+if(m0==='\n'||m0==='\r'){break;}
+throw new Error('CSVDataError: Illegal State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');case 3:if(m0===separator){endOfValue();break;}
+if(m0==='\n'||m0==='\r'){break;}
+if(m0===delimiter){throw new Error('CSVDataError: Illegal Quote [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}
+throw new Error('CSVDataError: Illegal Data [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');default:throw new Error('CSVDataError: Unknown State [Row:'+options.state.rowNum+'][Col:'+options.state.colNum+']');}});endOfValue();return entry;}},toArray:function(csv,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;var state=(options.state!==undefined?options.state:{});var options={delimiter:config.delimiter,separator:config.separator,onParseEntry:options.onParseEntry,onParseValue:options.onParseValue,state:state}
+var entry=$.csv.parsers.parseEntry(csv,options);if(!config.callback){return entry;}else{config.callback('',entry);}},toArrays:function(csv,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;var data=[];var options={delimiter:config.delimiter,separator:config.separator,onParseEntry:options.onParseEntry,onParseValue:options.onParseValue,start:options.start,end:options.end,state:{rowNum:1,colNum:1}};data=$.csv.parsers.parse(csv,options);if(!config.callback){return data;}else{config.callback('',data);}},toObjects:function(csv,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;config.headers='headers'in options?options.headers:$.csv.defaults.headers;options.start='start'in options?options.start:1;if(config.headers){options.start++;}
+if(options.end&&config.headers){options.end++;}
+var lines=[];var data=[];var options={delimiter:config.delimiter,separator:config.separator,onParseEntry:options.onParseEntry,onParseValue:options.onParseValue,start:options.start,end:options.end,state:{rowNum:1,colNum:1},match:false};var headerOptions={delimiter:config.delimiter,separator:config.separator,start:1,end:1,state:{rowNum:1,colNum:1}}
+var headerLine=$.csv.parsers.splitLines(csv,headerOptions);var headers=$.csv.toArray(headerLine[0],options);var lines=$.csv.parsers.splitLines(csv,options);options.state.colNum=1;if(headers){options.state.rowNum=2;}else{options.state.rowNum=1;}
+for(var i=0,len=lines.length;i<len;i++){var entry=$.csv.toArray(lines[i],options);var object={};for(var j in headers){object[headers[j]]=entry[j];}
+data.push(object);options.state.rowNum++;}
+if(!config.callback){return data;}else{config.callback('',data);}},fromArrays:function(arrays,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;config.escaper='escaper'in options?options.escaper:$.csv.defaults.escaper;config.experimental='experimental'in options?options.experimental:false;if(!config.experimental){throw new Error('not implemented');}
+var output=[];for(i in arrays){output.push(arrays[i]);}
+if(!config.callback){return output;}else{config.callback('',output);}},fromObjects2CSV:function(objects,options,callback){var options=(options!==undefined?options:{});var config={};config.callback=((callback!==undefined&&typeof(callback)==='function')?callback:false);config.separator='separator'in options?options.separator:$.csv.defaults.separator;config.delimiter='delimiter'in options?options.delimiter:$.csv.defaults.delimiter;config.experimental='experimental'in options?options.experimental:false;if(!config.experimental){throw new Error('not implemented');}
+var output=[];for(i in objects){output.push(arrays[i]);}
+if(!config.callback){return output;}else{config.callback('',output);}}};$.csvEntry2Array=$.csv.toArray;$.csv2Array=$.csv.toArrays;$.csv2Dictionary=$.csv.toObjects;})(jQuery);
+
+/*global jQuery:false, alert:false */
+
+/*
+ * Default text - jQuery plugin for html5 dragging files from desktop to browser
+ *
+ * Author: Weixi Yen
+ *
+ * Email: [Firstname][Lastname]@gmail.com
+ *
+ * Copyright (c) 2010 Resopollution
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Project home:
+ *   http://www.github.com/weixiyen/jquery-filedrop
+ *
+ * Version:  0.1.0
+ *
+ * Features:
+ *      Allows sending of extra parameters with file.
+ *      Works with Firefox 3.6+
+ *      Future-compliant with HTML5 spec (will work with Webkit browsers and IE9)
+ * Usage:
+ *  See README at project homepage
+ *
+ */
+ /*!
+  * @license: MIT
+  * @copyright: 2010 Resopollution
+  */
+;(function($) {
+
+    var default_opts = {
+        fallback_id: '',
+        fallback_dropzoneClick : true,
+        url: '',
+        refresh: 1000,
+        paramname: 'userfile',
+        requestType: 'POST',    // just in case you want to use another HTTP verb
+        allowedfileextensions:[],
+        allowedfiletypes:[],
+        maxfiles: 25,           // Ignored if queuefiles is set > 0
+        maxfilesize: 1,         // MB file size limit
+        queuefiles: 0,          // Max files before queueing (for large volume uploads)
+        queuewait: 200,         // Queue wait time if full
+        data: {},
+        headers: {},
+        drop: empty,
+        dragStart: empty,
+        dragEnter: empty,
+        dragOver: empty,
+        dragLeave: empty,
+        docEnter: empty,
+        docOver: empty,
+        docLeave: empty,
+        beforeEach: empty,
+        afterAll: empty,
+        rename: empty,
+        error: function(err, file, i, status) {
+          alert(err);
+        },
+        uploadStarted: empty,
+        uploadFinished: empty,
+        progressUpdated: empty,
+        globalProgressUpdated: empty,
+        speedUpdated: empty
+        },
+        errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge", "FileTypeNotAllowed", "NotFound", "NotReadable", "AbortError", "ReadError", "FileExtensionNotAllowed"];
+
+    $.fn.filedrop = function(options) {
+      var opts = $.extend({}, default_opts, options),
+          global_progress = [],
+          doc_leave_timer, stop_loop = false,
+          files_count = 0,
+          files;
+
+      if ( opts.fallback_dropzoneClick === true )
+      {
+        $('#' + opts.fallback_id).css({
+          display: 'none',
+          width: 0,
+          height: 0
+        });
+      }
+
+      this.on('drop', drop).on('dragstart', opts.dragStart).on('dragenter', dragEnter).on('dragover', dragOver).on('dragleave', dragLeave);
+      $(document).on('drop', docDrop).on('dragenter', docEnter).on('dragover', docOver).on('dragleave', docLeave);
+
+      if ( opts.fallback_dropzoneClick === true )
+      {
+        if ( this.find('#' + opts.fallback_id).length > 0 )
+        {
+          throw "Fallback element ["+opts.fallback_id+"] cannot be inside dropzone, unless option fallback_dropzoneClick is false";
+        }
+        else
+        {
+          this.on('click', function(e){
+            $('#' + opts.fallback_id).trigger(e);
+          });
+        }
+      }
+
+      $('#' + opts.fallback_id).change(function(e) {
+        opts.drop(e);
+        files = e.target.files;
+        files_count = files.length;
+        upload();
+      });
+
+      function drop(e) {
+        if( opts.drop.call(this, e) === false ) return false;
+        if(!e.originalEvent.dataTransfer)
+          return;
+        files = e.originalEvent.dataTransfer.files;
+        if (files === null || files === undefined || files.length === 0) {
+          opts.error(errors[0]);
+          return false;
+        }
+        files_count = files.length;
+        upload();
+        e.preventDefault();
+        return false;
+      }
+
+      function getBuilder(filename, filedata, mime, boundary) {
+        var dashdash = '--',
+            crlf = '\r\n',
+            builder = '',
+            paramname = opts.paramname;
+
+        if (opts.data) {
+          var params = $.param(opts.data).replace(/\+/g, '%20').split(/&/);
+
+          $.each(params, function() {
+            var pair = this.split("=", 2),
+                name = decodeURIComponent(pair[0]),
+                val  = decodeURIComponent(pair[1]);
+
+            if (pair.length !== 2) {
+                return;
+            }
+
+            builder += dashdash;
+            builder += boundary;
+            builder += crlf;
+            builder += 'Content-Disposition: form-data; name="' + name + '"';
+            builder += crlf;
+            builder += crlf;
+            builder += val;
+            builder += crlf;
+          });
+        }
+
+        if (jQuery.isFunction(paramname)){
+          paramname = paramname(filename);
+        }
+
+        builder += dashdash;
+        builder += boundary;
+        builder += crlf;
+        builder += 'Content-Disposition: form-data; name="' + (paramname||"") + '"';
+        builder += '; filename="' + encodeURIComponent(filename) + '"';
+        builder += crlf;
+
+        builder += 'Content-Type: ' + mime;
+        builder += crlf;
+        builder += crlf;
+
+        builder += filedata;
+        builder += crlf;
+
+        builder += dashdash;
+        builder += boundary;
+        builder += dashdash;
+        builder += crlf;
+        return builder;
+      }
+
+      function progress(e) {
+        if (e.lengthComputable) {
+          var percentage = Math.round((e.loaded * 100) / e.total);
+          if (this.currentProgress !== percentage) {
+
+            this.currentProgress = percentage;
+            opts.progressUpdated(this.index, this.file, this.currentProgress);
+
+            global_progress[this.global_progress_index] = this.currentProgress;
+            globalProgress();
+
+            var elapsed = new Date().getTime();
+            var diffTime = elapsed - this.currentStart;
+            if (diffTime >= opts.refresh) {
+              var diffData = e.loaded - this.startData;
+              var speed = diffData / diffTime; // KB per second
+              opts.speedUpdated(this.index, this.file, speed);
+              this.startData = e.loaded;
+              this.currentStart = elapsed;
+            }
+          }
+        }
+      }
+
+      function globalProgress() {
+        if (global_progress.length === 0) {
+          return;
+        }
+
+        var total = 0, index;
+        for (index in global_progress) {
+          if(global_progress.hasOwnProperty(index)) {
+            total = total + global_progress[index];
+          }
+        }
+
+        opts.globalProgressUpdated(Math.round(total / global_progress.length));
+      }
+
+      // Respond to an upload
+      function upload() {
+        stop_loop = false;
+
+        if (!files) {
+          opts.on('error', errors[0]);
+          return false;
+        }
+
+        if (opts.allowedfiletypes.push && opts.allowedfiletypes.length) {
+          for(var fileIndex = files.length;fileIndex--;) {
+            if(!files[fileIndex].type || $.inArray(files[fileIndex].type, opts.allowedfiletypes) < 0) {
+              opts.on('error', errors[3], files[fileIndex]);
+              return false;
+            }
+          }
+        }
+
+        if (opts.allowedfileextensions.push && opts.allowedfileextensions.length) {
+          for(var fileIndex = files.length;fileIndex--;) {
+            var allowedextension = false;
+            for (i=0;i<opts.allowedfileextensions.length;i++){
+              if (files[fileIndex].name.substr(files[fileIndex].name.length-opts.allowedfileextensions[i].length).toLowerCase()
+                      == opts.allowedfileextensions[i].toLowerCase()
+              ) {
+                allowedextension = true;
+              }
+            }
+            if (!allowedextension){
+              opts.on('error', errors[8], files[fileIndex]);
+              return false;
+            }
+          }
+        }
+
+        var filesDone = 0,
+            filesRejected = 0;
+
+        if (files_count > opts.maxfiles && opts.queuefiles === 0) {
+          opts.on('error', errors[1]);
+          return false;
+        }
+
+        // Define queues to manage upload process
+        var workQueue = [];
+        var processingQueue = [];
+        var doneQueue = [];
+
+        // Add everything to the workQueue
+        for (var i = 0; i < files_count; i++) {
+          workQueue.push(i);
+        }
+
+        // Helper function to enable pause of processing to wait
+        // for in process queue to complete
+        var pause = function(timeout) {
+          setTimeout(process, timeout);
+          return;
+        };
+
+        // Process an upload, recursive
+        var process = function() {
+
+          var fileIndex;
+
+          if (stop_loop) {
+            return false;
+          }
+
+          // Check to see if are in queue mode
+          if (opts.queuefiles > 0 && processingQueue.length >= opts.queuefiles) {
+            return pause(opts.queuewait);
+          } else {
+            // Take first thing off work queue
+            fileIndex = workQueue[0];
+            workQueue.splice(0, 1);
+
+            // Add to processing queue
+            processingQueue.push(fileIndex);
+          }
+
+          try {
+            if (beforeEach(files[fileIndex]) !== false) {
+              if (fileIndex === files_count) {
+                return;
+              }
+              var reader = new FileReader(),
+                  max_file_size = 1048576 * opts.maxfilesize;
+
+              reader.index = fileIndex;
+              if (files[fileIndex].size > max_file_size) {
+                opts.error(errors[2], files[fileIndex], fileIndex);
+                // Remove from queue
+                processingQueue.forEach(function(value, key) {
+                  if (value === fileIndex) {
+                    processingQueue.splice(key, 1);
+                  }
+                });
+                filesRejected++;
+                return true;
+              }
+
+              reader.onerror = function(e) {
+                  switch(e.target.error.code) {
+                      case e.target.error.NOT_FOUND_ERR:
+                          opts.error(errors[4]);
+                          return false;
+                      case e.target.error.NOT_READABLE_ERR:
+                          opts.error(errors[5]);
+                          return false;
+                      case e.target.error.ABORT_ERR:
+                          opts.error(errors[6]);
+                          return false;
+                      default:
+                          opts.error(errors[7]);
+                          return false;
+                  };
+              };
+
+              reader.onloadend = !opts.beforeSend ? send : function (e) {
+                opts.beforeSend(files[fileIndex], fileIndex, function () { send(e); });
+              };
+
+              reader.readAsDataURL(files[fileIndex]);
+
+            } else {
+              filesRejected++;
+            }
+          } catch (err) {
+            // Remove from queue
+            processingQueue.forEach(function(value, key) {
+              if (value === fileIndex) {
+                processingQueue.splice(key, 1);
+              }
+            });
+            opts.error(errors[0]);
+            return false;
+          }
+
+          // If we still have work to do,
+          if (workQueue.length > 0) {
+            process();
+          }
+        };
+
+        var send = function(e) {
+
+          var fileIndex = (e.srcElement || e.target).index;
+
+          // Sometimes the index is not attached to the
+          // event object. Find it by size. Hack for sure.
+          if (e.target.index === undefined) {
+            e.target.index = getIndexBySize(e.total);
+          }
+
+          var xhr = new XMLHttpRequest(),
+              upload = xhr.upload,
+              file = files[e.target.index],
+              index = e.target.index,
+              start_time = new Date().getTime(),
+              boundary = '------multipartformboundary' + (new Date()).getTime(),
+              global_progress_index = global_progress.length,
+              builder,
+              newName = rename(file.name),
+              mime = file.type;
+
+          if (opts.withCredentials) {
+            xhr.withCredentials = opts.withCredentials;
+          }
+
+          var encodedString = e.target.result.split(',')[1];
+          var data = encodedString === undefined ? '' : atob(encodedString);
+          if (typeof newName === "string") {
+            builder = getBuilder(newName, data, mime, boundary);
+          } else {
+            builder = getBuilder(file.name, data, mime, boundary);
+          }
+
+          upload.index = index;
+          upload.file = file;
+          upload.downloadStartTime = start_time;
+          upload.currentStart = start_time;
+          upload.currentProgress = 0;
+          upload.global_progress_index = global_progress_index;
+          upload.startData = 0;
+          upload.addEventListener("progress", progress, false);
+
+          // Allow url to be a method
+          if (jQuery.isFunction(opts.url)) {
+              xhr.open(opts.requestType, opts.url(upload), true);
+          } else {
+              xhr.open(opts.requestType, opts.url, true);
+          }
+
+          xhr.setRequestHeader('content-type', 'multipart/form-data; boundary=' + boundary);
+          xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+          // Add headers
+          $.each(opts.headers, function(k, v) {
+            xhr.setRequestHeader(k, v);
+          });
+
+            if(!xhr.sendAsBinary){
+                xhr.sendAsBinary = function(datastr) {
+                    function byteValue(x) {
+                        return x.charCodeAt(0) & 0xff;
+                    }
+                    var ords = Array.prototype.map.call(datastr, byteValue);
+                    var ui8a = new Uint8Array(ords);
+                    this.send(ui8a.buffer);
+                }
+            }
+
+          xhr.sendAsBinary(builder);
+
+          global_progress[global_progress_index] = 0;
+          globalProgress();
+
+          opts.uploadStarted(index, file, files_count);
+
+          xhr.onload = function() {
+              var serverResponse = null;
+
+              if (xhr.responseText) {
+                try {
+                  serverResponse = jQuery.parseJSON(xhr.responseText);
+                }
+                catch (e) {
+                  serverResponse = xhr.responseText;
+                }
+              }
+
+              var now = new Date().getTime(),
+                  timeDiff = now - start_time,
+                  result = opts.uploadFinished(index, file, serverResponse, timeDiff, xhr);
+              filesDone++;
+
+              // Remove from processing queue
+              processingQueue.forEach(function(value, key) {
+                if (value === fileIndex) {
+                  processingQueue.splice(key, 1);
+                }
+              });
+
+              // Add to donequeue
+              doneQueue.push(fileIndex);
+
+              // Make sure the global progress is updated
+              global_progress[global_progress_index] = 100;
+              globalProgress();
+
+              if (filesDone === (files_count - filesRejected)) {
+                afterAll();
+              }
+              if (result === false) {
+                stop_loop = true;
+              }
+
+
+            // Pass any errors to the error option
+            if (xhr.status < 200 || xhr.status > 299) {
+              opts.error(xhr.statusText, file, fileIndex, xhr.status);
+            }
+          };
+        };
+
+        // Initiate the processing loop
+        process();
+      }
+
+      function getIndexBySize(size) {
+        for (var i = 0; i < files_count; i++) {
+          if (files[i].size === size) {
+            return i;
+          }
+        }
+
+        return undefined;
+      }
+
+      function rename(name) {
+        return opts.rename(name);
+      }
+
+      function beforeEach(file) {
+        return opts.beforeEach(file);
+      }
+
+      function afterAll() {
+        return opts.afterAll();
+      }
+
+      function dragEnter(e) {
+        clearTimeout(doc_leave_timer);
+        e.preventDefault();
+        opts.dragEnter.call(this, e);
+      }
+
+      function dragOver(e) {
+        clearTimeout(doc_leave_timer);
+        e.preventDefault();
+        opts.docOver.call(this, e);
+        opts.dragOver.call(this, e);
+      }
+
+      function dragLeave(e) {
+        clearTimeout(doc_leave_timer);
+        opts.dragLeave.call(this, e);
+        e.stopPropagation();
+      }
+
+      function docDrop(e) {
+        e.preventDefault();
+        opts.docLeave.call(this, e);
+        return false;
+      }
+
+      function docEnter(e) {
+        clearTimeout(doc_leave_timer);
+        e.preventDefault();
+        opts.docEnter.call(this, e);
+        return false;
+      }
+
+      function docOver(e) {
+        clearTimeout(doc_leave_timer);
+        e.preventDefault();
+        opts.docOver.call(this, e);
+        return false;
+      }
+
+      function docLeave(e) {
+        doc_leave_timer = setTimeout((function(_this) {
+          return function() {
+            opts.docLeave.call(_this, e);
+          };
+        })(this), 200);
+      }
+
+      return this;
+    };
+
+    function empty() {}
+
+    try {
+      if (XMLHttpRequest.prototype.sendAsBinary) {
+          return;
+      }
+      XMLHttpRequest.prototype.sendAsBinary = function(datastr) {
+        function byteValue(x) {
+          return x.charCodeAt(0) & 0xff;
+        }
+        var ords = Array.prototype.map.call(datastr, byteValue);
+        var ui8a = new Uint8Array(ords);
+
+        // Not pretty: Chrome 22 deprecated sending ArrayBuffer, moving instead
+        // to sending ArrayBufferView.  Sadly, no proper way to detect this
+        // functionality has been discovered.  Happily, Chrome 22 also introduced
+        // the base ArrayBufferView class, not present in Chrome 21.
+        if ('ArrayBufferView' in window)
+          this.send(ui8a);
+        else
+          this.send(ui8a.buffer);
+      };
+    } catch (e) {}
+
+  })(jQuery);
+
+/*!
+ * jQuery tabs - lucid style
+ *
+ * USAGE
+ * // Basic Usage
+ * $('.tabContainer').dock();
+ * // Optional Parameters
+ * $(selector).dock({
+ *      large: false, // Use large text in tabs
+ *      border: true
+ *  });
+ */
+
+
+(function($) {
+    $.fn.lucidtabs = function(settings) {
+        var config = $.extend({
+            large: false,
+            narrow: false,
+            border: true,
+            contentSelector: 'div',
+            contentCSS: {},
+            buttons:[],
+            tabChangeFilter: function(toTab, fromTab, changeTabs) { changeTabs(); }
+        }, settings);
+       
+        this.each(function() {
+            var panels = $(this).children(config.contentSelector)
+                .addClass('lucid-tabs-content')
+                .css(config.contentCSS);
+           
+            var list = $(this).children('ul');
+           
+            // If no list, generate one using titles from children divs
+            if (list.length == 0) {
+                list = $('<ul></ul>').prependTo($(this));
+                panels.each(function() {
+                    list.append('<li>' + $(this).attr('title') + '</li>');
+                    $(this).removeAttr('title');
+                });
+            }
+           
+            var tabs = list.addClass('lucid-tabs').children('li');
+           
+            if (config.border)
+                panels.addClass('lucid-tabs-content-framed');
+               
+            if (config.large)
+                list.addClass('lucid-tabs-large');
+            else if (config.narrow) {
+                list.addClass('lucid-tabs-narrow');
+            }
+           
+            panels.hide();
+            tabs.each(function(i) {
+                var me = this;
+
+                var changeTabs = function() {
+                    panels.hide().eq(i).show();
+                    $(me).addClass('active').siblings('.active').removeClass('active');
+                };
+
+                $(this).click(function() {
+                    if (config.tabChangeFilter &&
+                        typeof config.tabChangeFilter == 'function' &&
+                        !$(this).hasClass('active')) {
+
+                        config.tabChangeFilter($(this).text(),
+                                               $(this).siblings('.active').text(),
+                                               changeTabs
+                        );
+                    }
+                    else {
+                        changeTabs();
+                    }
+                });
+                if ($(this).hasClass('active'))
+                    $(this).click();
+            });
+            if (tabs.filter('.active').length == 0)
+                tabs.eq(0).click();
+           
+            list.prepend('<li class="first"></li>').append('<li class="last"></li>');
+            for(var i = 0; i < config.buttons.length; i++) {
+                if(config.buttons[i]) {
+                    var button = $('<div class="tabbar-button"><div class="icn-21 icn-'+config.buttons[i].icon+'-inverted-inverse"></div></div>')
+                        .attr('title', config.buttons[i].title)
+                        .click(config.buttons[i].click);
+                       
+                    list.append(button);
+                }
+            }
+           
+            $(this).show();
+        });
+
+        return this;
+    };
+})(jQuery);
+/*!
+ * @copyright: 2013 Brandon Aaron (http://brandon.aaron.sh)
+ * @license: MIT
+ *
+ * Version: 3.1.12
+ *
+ * Requires: jQuery 1.2.2+
+ */
+!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):"object"==typeof exports?module.exports=a:a(jQuery)}(function(a){function b(b){var g=b||window.event,h=i.call(arguments,1),j=0,l=0,m=0,n=0,o=0,p=0;if(b=a.event.fix(g),b.type="mousewheel","detail"in g&&(m=-1*g.detail),"wheelDelta"in g&&(m=g.wheelDelta),"wheelDeltaY"in g&&(m=g.wheelDeltaY),"wheelDeltaX"in g&&(l=-1*g.wheelDeltaX),"axis"in g&&g.axis===g.HORIZONTAL_AXIS&&(l=-1*m,m=0),j=0===m?l:m,"deltaY"in g&&(m=-1*g.deltaY,j=m),"deltaX"in g&&(l=g.deltaX,0===m&&(j=-1*l)),0!==m||0!==l){if(1===g.deltaMode){var q=a.data(this,"mousewheel-line-height");j*=q,m*=q,l*=q}else if(2===g.deltaMode){var r=a.data(this,"mousewheel-page-height");j*=r,m*=r,l*=r}if(n=Math.max(Math.abs(m),Math.abs(l)),(!f||f>n)&&(f=n,d(g,n)&&(f/=40)),d(g,n)&&(j/=40,l/=40,m/=40),j=Math[j>=1?"floor":"ceil"](j/f),l=Math[l>=1?"floor":"ceil"](l/f),m=Math[m>=1?"floor":"ceil"](m/f),k.settings.normalizeOffset&&this.getBoundingClientRect){var s=this.getBoundingClientRect();o=b.clientX-s.left,p=b.clientY-s.top}return b.deltaX=l,b.deltaY=m,b.deltaFactor=f,b.offsetX=o,b.offsetY=p,b.deltaMode=0,h.unshift(b,j,l,m),e&&clearTimeout(e),e=setTimeout(c,200),(a.event.dispatch||a.event.handle).apply(this,h)}}function c(){f=null}function d(a,b){return k.settings.adjustOldDeltas&&"mousewheel"===a.type&&b%120===0}var e,f,g=["wheel","mousewheel","DOMMouseScroll","MozMousePixelScroll"],h="onwheel"in document||document.documentMode>=9?["wheel"]:["mousewheel","DomMouseScroll","MozMousePixelScroll"],i=Array.prototype.slice;if(a.event.fixHooks)for(var j=g.length;j;)a.event.fixHooks[g[--j]]=a.event.mouseHooks;var k=a.event.special.mousewheel={version:"3.1.12",setup:function(){if(this.addEventListener)for(var c=h.length;c;)this.addEventListener(h[--c],b,!1);else this.onmousewheel=b;a.data(this,"mousewheel-line-height",k.getLineHeight(this)),a.data(this,"mousewheel-page-height",k.getPageHeight(this))},teardown:function(){if(this.removeEventListener)for(var c=h.length;c;)this.removeEventListener(h[--c],b,!1);else this.onmousewheel=null;a.removeData(this,"mousewheel-line-height"),a.removeData(this,"mousewheel-page-height")},getLineHeight:function(b){var c=a(b),d=c["offsetParent"in a.fn?"offsetParent":"parent"]();return d.length||(d=a("body")),parseInt(d.css("fontSize"),10)||parseInt(c.css("fontSize"),10)||16},getPageHeight:function(b){return a(b).height()},settings:{adjustOldDeltas:!0,normalizeOffset:!0}};a.fn.extend({mousewheel:function(a){return a?this.bind("mousewheel",a):this.trigger("mousewheel")},unmousewheel:function(a){return this.unbind("mousewheel",a)}})});
+
+/*!
+ * jQuery Transit - CSS3 transitions and transformations
+ * @copyright: (c) 2011-2012 Rico Sta. Cruz <rico@ricostacruz.com>
+ * @license: MIT
+ *
+ * http://ricostacruz.com/jquery.transit
+ * http://github.com/rstacruz/jquery.transit
+ */
+(function(k){k.transit={version:"0.9.9",propertyMap:{marginLeft:"margin",marginRight:"margin",marginBottom:"margin",marginTop:"margin",paddingLeft:"padding",paddingRight:"padding",paddingBottom:"padding",paddingTop:"padding"},enabled:true,useTransitionEnd:false};var d=document.createElement("div");var q={};function b(v){if(v in d.style){return v}var u=["Moz","Webkit","O","ms"];var r=v.charAt(0).toUpperCase()+v.substr(1);if(v in d.style){return v}for(var t=0;t<u.length;++t){var s=u[t]+r;if(s in d.style){return s}}}function e(){d.style[q.transform]="";d.style[q.transform]="rotateY(90deg)";return d.style[q.transform]!==""}var a=navigator.userAgent.toLowerCase().indexOf("chrome")>-1;q.transition=b("transition");q.transitionDelay=b("transitionDelay");q.transform=b("transform");q.transformOrigin=b("transformOrigin");q.transform3d=e();var i={transition:"transitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd",WebkitTransition:"webkitTransitionEnd",msTransition:"MSTransitionEnd"};var f=q.transitionEnd=i[q.transition]||null;for(var p in q){if(q.hasOwnProperty(p)&&typeof k.support[p]==="undefined"){k.support[p]=q[p]}}d=null;k.cssEase={_default:"ease","in":"ease-in",out:"ease-out","in-out":"ease-in-out",snap:"cubic-bezier(0,1,.5,1)",easeOutCubic:"cubic-bezier(.215,.61,.355,1)",easeInOutCubic:"cubic-bezier(.645,.045,.355,1)",easeInCirc:"cubic-bezier(.6,.04,.98,.335)",easeOutCirc:"cubic-bezier(.075,.82,.165,1)",easeInOutCirc:"cubic-bezier(.785,.135,.15,.86)",easeInExpo:"cubic-bezier(.95,.05,.795,.035)",easeOutExpo:"cubic-bezier(.19,1,.22,1)",easeInOutExpo:"cubic-bezier(1,0,0,1)",easeInQuad:"cubic-bezier(.55,.085,.68,.53)",easeOutQuad:"cubic-bezier(.25,.46,.45,.94)",easeInOutQuad:"cubic-bezier(.455,.03,.515,.955)",easeInQuart:"cubic-bezier(.895,.03,.685,.22)",easeOutQuart:"cubic-bezier(.165,.84,.44,1)",easeInOutQuart:"cubic-bezier(.77,0,.175,1)",easeInQuint:"cubic-bezier(.755,.05,.855,.06)",easeOutQuint:"cubic-bezier(.23,1,.32,1)",easeInOutQuint:"cubic-bezier(.86,0,.07,1)",easeInSine:"cubic-bezier(.47,0,.745,.715)",easeOutSine:"cubic-bezier(.39,.575,.565,1)",easeInOutSine:"cubic-bezier(.445,.05,.55,.95)",easeInBack:"cubic-bezier(.6,-.28,.735,.045)",easeOutBack:"cubic-bezier(.175, .885,.32,1.275)",easeInOutBack:"cubic-bezier(.68,-.55,.265,1.55)"};k.cssHooks["transit:transform"]={get:function(r){return k(r).data("transform")||new j()},set:function(s,r){var t=r;if(!(t instanceof j)){t=new j(t)}if(q.transform==="WebkitTransform"&&!a){s.style[q.transform]=t.toString(true)}else{s.style[q.transform]=t.toString()}k(s).data("transform",t)}};k.cssHooks.transform={set:k.cssHooks["transit:transform"].set};if(k.fn.jquery<"1.8"){k.cssHooks.transformOrigin={get:function(r){return r.style[q.transformOrigin]},set:function(r,s){r.style[q.transformOrigin]=s}};k.cssHooks.transition={get:function(r){return r.style[q.transition]},set:function(r,s){r.style[q.transition]=s}}}n("scale");n("translate");n("rotate");n("rotateX");n("rotateY");n("rotate3d");n("perspective");n("skewX");n("skewY");n("x",true);n("y",true);function j(r){if(typeof r==="string"){this.parse(r)}return this}j.prototype={setFromString:function(t,s){var r=(typeof s==="string")?s.split(","):(s.constructor===Array)?s:[s];r.unshift(t);j.prototype.set.apply(this,r)},set:function(s){var r=Array.prototype.slice.apply(arguments,[1]);if(this.setter[s]){this.setter[s].apply(this,r)}else{this[s]=r.join(",")}},get:function(r){if(this.getter[r]){return this.getter[r].apply(this)}else{return this[r]||0}},setter:{rotate:function(r){this.rotate=o(r,"deg")},rotateX:function(r){this.rotateX=o(r,"deg")},rotateY:function(r){this.rotateY=o(r,"deg")},scale:function(r,s){if(s===undefined){s=r}this.scale=r+","+s},skewX:function(r){this.skewX=o(r,"deg")},skewY:function(r){this.skewY=o(r,"deg")},perspective:function(r){this.perspective=o(r,"px")},x:function(r){this.set("translate",r,null)},y:function(r){this.set("translate",null,r)},translate:function(r,s){if(this._translateX===undefined){this._translateX=0}if(this._translateY===undefined){this._translateY=0}if(r!==null&&r!==undefined){this._translateX=o(r,"px")}if(s!==null&&s!==undefined){this._translateY=o(s,"px")}this.translate=this._translateX+","+this._translateY}},getter:{x:function(){return this._translateX||0},y:function(){return this._translateY||0},scale:function(){var r=(this.scale||"1,1").split(",");if(r[0]){r[0]=parseFloat(r[0])}if(r[1]){r[1]=parseFloat(r[1])}return(r[0]===r[1])?r[0]:r},rotate3d:function(){var t=(this.rotate3d||"0,0,0,0deg").split(",");for(var r=0;r<=3;++r){if(t[r]){t[r]=parseFloat(t[r])}}if(t[3]){t[3]=o(t[3],"deg")}return t}},parse:function(s){var r=this;s.replace(/([a-zA-Z0-9]+)\((.*?)\)/g,function(t,v,u){r.setFromString(v,u)})},toString:function(t){var s=[];for(var r in this){if(this.hasOwnProperty(r)){if((!q.transform3d)&&((r==="rotateX")||(r==="rotateY")||(r==="perspective")||(r==="transformOrigin"))){continue}if(r[0]!=="_"){if(t&&(r==="scale")){s.push(r+"3d("+this[r]+",1)")}else{if(t&&(r==="translate")){s.push(r+"3d("+this[r]+",0)")}else{s.push(r+"("+this[r]+")")}}}}}return s.join(" ")}};function m(s,r,t){if(r===true){s.queue(t)}else{if(r){s.queue(r,t)}else{t()}}}function h(s){var r=[];k.each(s,function(t){t=k.camelCase(t);t=k.transit.propertyMap[t]||k.cssProps[t]||t;t=c(t);if(k.inArray(t,r)===-1){r.push(t)}});return r}function g(s,v,x,r){var t=h(s);if(k.cssEase[x]){x=k.cssEase[x]}var w=""+l(v)+" "+x;if(parseInt(r,10)>0){w+=" "+l(r)}var u=[];k.each(t,function(z,y){u.push(y+" "+w)});return u.join(", ")}k.fn.transition=k.fn.transit=function(z,s,y,C){var D=this;var u=0;var w=true;if(typeof s==="function"){C=s;s=undefined}if(typeof y==="function"){C=y;y=undefined}if(typeof z.easing!=="undefined"){y=z.easing;delete z.easing}if(typeof z.duration!=="undefined"){s=z.duration;delete z.duration}if(typeof z.complete!=="undefined"){C=z.complete;delete z.complete}if(typeof z.queue!=="undefined"){w=z.queue;delete z.queue}if(typeof z.delay!=="undefined"){u=z.delay;delete z.delay}if(typeof s==="undefined"){s=k.fx.speeds._default}if(typeof y==="undefined"){y=k.cssEase._default}s=l(s);var E=g(z,s,y,u);var B=k.transit.enabled&&q.transition;var t=B?(parseInt(s,10)+parseInt(u,10)):0;if(t===0){var A=function(F){D.css(z);if(C){C.apply(D)}if(F){F()}};m(D,w,A);return D}var x={};var r=function(H){var G=false;var F=function(){if(G){D.unbind(f,F)}if(t>0){D.each(function(){this.style[q.transition]=(x[this]||null)})}if(typeof C==="function"){C.apply(D)}if(typeof H==="function"){H()}};if((t>0)&&(f)&&(k.transit.useTransitionEnd)){G=true;D.bind(f,F)}else{window.setTimeout(F,t)}D.each(function(){if(t>0){this.style[q.transition]=E}k(this).css(z)})};var v=function(F){this.offsetWidth;r(F)};m(D,w,v);return this};function n(s,r){if(!r){k.cssNumber[s]=true}k.transit.propertyMap[s]=q.transform;k.cssHooks[s]={get:function(v){var u=k(v).css("transit:transform");return u.get(s)},set:function(v,w){var u=k(v).css("transit:transform");u.setFromString(s,w);k(v).css({"transit:transform":u})}}}function c(r){return r.replace(/([A-Z])/g,function(s){return"-"+s.toLowerCase()})}function o(s,r){if((typeof s==="string")&&(!s.match(/^[\-0-9\.]+$/))){return s}else{return""+s+r}}function l(s){var r=s;if(k.fx.speeds[r]){r=k.fx.speeds[r]}return o(r,"ms")}k.transit.getTransitionValue=g})(jQuery);
+
+/*!
+ * jQuery-ajaxTransport-XDomainRequest - v1.0.2 - 2014-05-02
+ * https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest
+ * @copyright: 2014 Jason Moon (@JSONMOON)
+ * @license: MIT
+ */
+(function(a){if(typeof define==='function'&&define.amd){define(['jquery'],a)}else{a(jQuery)}}(function($){if($.support.cors||!$.ajaxTransport||!window.XDomainRequest){return}var n=/^https?:\/\//i;var o=/^get|post$/i;var p=new RegExp('^'+location.protocol,'i');$.ajaxTransport('* text html xml json',function(j,k,l){if(!j.crossDomain||!j.async||!o.test(j.type)||!n.test(j.url)||!p.test(j.url)){return}var m=null;return{send:function(f,g){var h='';var i=(k.dataType||'').toLowerCase();m=new XDomainRequest();if(/^\d+$/.test(k.timeout)){m.timeout=k.timeout}m.ontimeout=function(){g(500,'timeout')};m.onload=function(){var a='Content-Length: '+m.responseText.length+'\r\nContent-Type: '+m.contentType;var b={code:200,message:'success'};var c={text:m.responseText};try{if(i==='html'||/text\/html/i.test(m.contentType)){c.html=m.responseText}else if(i==='json'||(i!=='text'&&/\/json/i.test(m.contentType))){try{c.json=$.parseJSON(m.responseText)}catch(e){b.code=500;b.message='parseerror'}}else if(i==='xml'||(i!=='text'&&/\/xml/i.test(m.contentType))){var d=new ActiveXObject('Microsoft.XMLDOM');d.async=false;try{d.loadXML(m.responseText)}catch(e){d=undefined}if(!d||!d.documentElement||d.getElementsByTagName('parsererror').length){b.code=500;b.message='parseerror';throw'Invalid XML: '+m.responseText;}c.xml=d}}catch(parseMessage){throw parseMessage;}finally{g(b.code,b.message,c,a)}};m.onprogress=function(){};m.onerror=function(){g(500,'error',{text:m.responseText})};if(k.data){h=($.type(k.data)==='string')?k.data:$.param(k.data)}m.open(j.type,j.url);m.send(h)},abort:function(){if(m){m.abort()}}}})}));
+

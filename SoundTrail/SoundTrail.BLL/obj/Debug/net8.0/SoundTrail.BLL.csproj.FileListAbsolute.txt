@@ -1,0 +1,16 @@
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\bin\Debug\net8.0\SoundTrail.BLL.deps.json
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\bin\Debug\net8.0\SoundTrail.BLL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\bin\Debug\net8.0\SoundTrail.BLL.pdb
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\bin\Debug\net8.0\SoundTrail.DAL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\bin\Debug\net8.0\SoundTrail.DAL.pdb
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.csproj.AssemblyReference.cache
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.AssemblyInfoInputs.cache
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.AssemblyInfo.cs
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.csproj.CoreCompileInputs.cache
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.sourcelink.json
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTra.5AB4DFBA.Up2Date
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\refint\SoundTrail.BLL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\SoundTrail.BLL.pdb
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.BLL\obj\Debug\net8.0\ref\SoundTrail.BLL.dll

@@ -1,0 +1,13 @@
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\bin\Debug\net8.0\SoundTrail.DAL.deps.json
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\bin\Debug\net8.0\SoundTrail.DAL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\bin\Debug\net8.0\SoundTrail.DAL.pdb
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.AssemblyInfoInputs.cache
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.AssemblyInfo.cs
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.csproj.CoreCompileInputs.cache
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.sourcelink.json
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\refint\SoundTrail.DAL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.pdb
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\ref\SoundTrail.DAL.dll
+C:\Users\g0sh3to\RiderProjects\2425-11-v-sd-music-festival-tracker-project-GNIvanov21\SoundTrail\SoundTrail.DAL\obj\Debug\net8.0\SoundTrail.DAL.csproj.AssemblyReference.cache

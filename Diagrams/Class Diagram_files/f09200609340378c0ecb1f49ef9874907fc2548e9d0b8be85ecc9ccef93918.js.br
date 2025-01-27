@@ -1,0 +1,2 @@
+function UchT(a,b,c){UcTKk(a.Wfa,c,[b]);if(a.V1e.value)throw Error("A lazy component token may not register multiple components");a.Zmg.resolve({component:b,xcb:c})};
+//# sourceURL=/js/application/universalcanvas_app/chunk/gen_fef78000180008050180000000000000800000000000000000000000000000000000000000.js?compiled=1

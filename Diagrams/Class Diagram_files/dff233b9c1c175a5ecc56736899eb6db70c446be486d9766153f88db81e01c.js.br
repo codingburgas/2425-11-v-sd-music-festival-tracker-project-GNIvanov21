@@ -1,0 +1,2 @@
+UcSK.set("estimation",class extends UcRK{constructor(){const a=Ucu(UcQK),b=Ucu(UcMvd),c=Ucu(UckA),d=Ucu(UcYq),e=Ucu(UcfF);super("estimation.js");this.Fm="(^EstimationShape$)|(^(TshirtSizeShape|(StoryPoint|TshirtSize)ShapeBank)Block$)";UcYMl.register(this.id,a.na);UcZMl.register(this.id,a.na);Uc6Ml.register(this.id,a.na,b,c);Uc$Ml.register(this.id,a.na,b,c,e.Wz());UcXq(d,UcJyj)}});
+//# sourceURL=/js/application/universalcanvas_app/chunk/estimation.js?compiled=1

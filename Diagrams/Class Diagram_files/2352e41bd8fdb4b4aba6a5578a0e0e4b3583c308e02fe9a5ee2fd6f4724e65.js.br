@@ -1,0 +1,11 @@
+/*
+ download.js v4.1
+ @copyright: dandavis; 2008-2015
+ @license: CC-BY-2.0
+*/
+(function(u,b){"function"===typeof define&&define.amd?define([],b):"object"===typeof exports?module.exports=b():u.download=b()})(this,function(){return function v(b,e,f){function w(a){var g=a.split(/[:;,]/);a=g[1];g=("base64"==g[2]?atob:decodeURIComponent)(g.pop());for(var k=g.length,q=0,r=new Uint8Array(k);q<k;++q)r[q]=g.charCodeAt(q);return new l([r],{type:a})}function n(a,g){if("download"in d)return d.href=a,d.setAttribute("download",p),d.className="download-js-link",d.innerHTML="downloading...",
+m.body.appendChild(d),setTimeout(function(){d.click();m.body.removeChild(d);!0===g&&setTimeout(function(){h.URL.revokeObjectURL(d.href)},250)},66),!0;if("undefined"!==typeof safari)return a="data:"+a.replace(/^data:([\w\/\-\+]+)/,"application/octet-stream"),!window.open(a)&&confirm("Displaying New Document\n\nUse Save As... to download, then click back to return to this page.")&&(location.href=a),!0;var k=m.createElement("iframe");m.body.appendChild(k);g||(a="data:"+a.replace(/^data:([\w\/\-\+]+)/,
+"application/octet-stream"));k.src=a;setTimeout(function(){m.body.removeChild(k)},333)}var h=window,c=f||"application/octet-stream";f=!e&&!f&&b;var m=document,d=m.createElement("a"),t=function(a){return String(a)},l=h.Blob||h.MozBlob||h.WebKitBlob||t,p=e||"download";l=l.call?l.bind(h):Blob;"true"===String(this)&&(b=[b,c],c=b[0],b=b[1]);if(f&&2048>f.length&&(p=f.split("/").pop().split("?")[0],d.href=f,-1!==d.href.indexOf(f)))return c=new XMLHttpRequest,c.open("GET",f,!0),c.responseType="blob",c.onload=
+function(a){v(a.target.response,p,"application/octet-stream")},c.send(),c;if(/^data:[\w+\-]+\/[\w+\-]+[,;]/.test(b))return navigator.msSaveBlob?navigator.msSaveBlob(w(b),p):n(b);e=b instanceof l?b:new l([b],{type:c});if(navigator.msSaveBlob)return navigator.msSaveBlob(e,p);if(h.URL)n(h.URL.createObjectURL(e),!0);else{if("string"===typeof e||e.constructor===t)try{return n("data:"+c+";base64,"+h.btoa(e))}catch(a){return n("data:"+c+","+encodeURIComponent(e))}c=new FileReader;c.onload=function(a){n(this.result)};
+c.readAsDataURL(e)}return!0}});
+

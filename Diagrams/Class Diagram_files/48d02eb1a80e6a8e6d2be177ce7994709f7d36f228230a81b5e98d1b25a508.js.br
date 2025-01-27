@@ -1,0 +1,6 @@
+i18n.setData(
+    JSON.parse(
+        "{\"coreux-side-navigation-collapse\":\"Collapse side navigation\",\"coreux-side-navigation-expand\":\"Expand side navigation\"}"
+    ),
+    'en'
+);

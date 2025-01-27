@@ -1,0 +1,2 @@
+UcSK.set("mermaiddiagramviz",class extends UcRK{constructor(){const a=Ucu(UcQK);super("mermaiddiagramviz.js");this.Fm="^MermaidDiagram";UcTol.register(this.id,a.na);UcSol.register(this.id,a.na);Uc2ol.register(this.id,a.c5)}});
+//# sourceURL=/js/application/universalcanvas_app/chunk/mermaiddiagramviz.js?compiled=1
